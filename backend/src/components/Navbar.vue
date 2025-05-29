@@ -5,7 +5,7 @@
 </button>
 
  <Menu as="div" class="relative inline-block text-left">
-    <MenuButton class="flex items-center"><img class="rounded-full w-8 mr-2" src="https://images.vexels.com/media/users/3/140237/isolated/preview/90175ec3f4696bde71b1d2890ed60c80-female-profile-avatar-4.png"> <small>Cookie Baker</small>
+    <MenuButton class="flex items-center"><img class="rounded-full w-8 mr-2" src="https://images.vexels.com/media/users/3/140237/isolated/preview/90175ec3f4696bde71b1d2890ed60c80-female-profile-avatar-4.png"> <small>{{currentUser.name}}</small>
     <ChevronDownIcon class="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100" aria-hidden="true" /></MenuButton>
       <Transition
     enter-active-class="transition duration-100 ease-out"
@@ -91,7 +91,7 @@ import router from "../router";
 import {computed} from "vue";
 
 const emit = defineEmits(['toggle-sidebar']);
-
+// const user = computed(() => store.state.user.data);
 
 const currentUser = computed(() => store.state.user.data);
 

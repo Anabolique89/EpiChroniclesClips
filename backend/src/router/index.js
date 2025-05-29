@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import AppLayout from "../components/AppLayout.vue";
 import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
-// import Products from "../views/Products/Products.vue";
+import Products from "../views/Products.vue";
 import store from "@/store";
 import RequestPassword from "../views/RequestPassword.vue";
 import ResetPassword from "../views/ResetPassword.vue";
@@ -54,15 +54,15 @@ const routes = [
         },
         children: [
             {
-                path: "dashboard",
+                path: "/dashboard",
                 name: "app.dashboard",
                 component: Dashboard,
             },
-            // {
-            //     path: "products",
-            //     name: "app.products",
-            //     component: Products,
-            // },
+            {
+                path: "/products",
+                name: "app.products",
+                component: Products,
+            },
         ],
     },
 ];

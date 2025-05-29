@@ -7,14 +7,14 @@
     </span>
     <span class="text-white text-sm">Dashboard</span>
 </router-link>
-<router-link :to="{name: 'app.dashboard'}"
+<router-link :to="{name: 'app.products'}"
              class="flex items-center py-1 px-3 rounded transition-colors hover:bg-black/30 font-light mb-2">
     <span class="mr-2">
       <ViewListIcon class="w-4 text-white"/>
     </span>
     <span class="text-white text-sm">Products</span>
 </router-link>
-<router-link to="/app/dashboard" 
+<router-link to="/products" 
              class="flex items-center py-1 px-3 rounded transition-colors hover:bg-black/30 font-light mb-2">
     <span class="mr-2">
       <UsersIcon class="w-4 text-white"/>
@@ -36,6 +36,7 @@
 <script setup>
 
 import {HomeIcon, UsersIcon, ViewListIcon, ChartBarIcon} from '@heroicons/vue/solid'
+import Products from '@/views/Products.vue';
 </script>
 
 

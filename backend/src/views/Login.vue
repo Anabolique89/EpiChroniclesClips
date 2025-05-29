@@ -59,6 +59,7 @@
 
                 </div>
       </form>
+
     <p v-if="errorMsg" class="text-red-500 text-sm mt-2">{{ errorMsg }}</p>
 
 </GuestLayout>
@@ -69,10 +70,10 @@
 import GuestLayout from '@/components/GuestLayout.vue';
 import {ref} from 'vue';
 import store from '@/store';
-import router from '@/router';
+// import router from '@/router';
 import { useRouter } from 'vue-router';
 
-const router =useRouter()
+const router =useRouter();
 
 let loading = ref(false);
 let errorMsg = ref("");
