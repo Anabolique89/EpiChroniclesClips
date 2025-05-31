@@ -3,17 +3,43 @@ import AppLayout from "../components/AppLayout.vue";
 import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Products from "../views/Products.vue";
-import store from "@/store";
 import RequestPassword from "../views/RequestPassword.vue";
 import ResetPassword from "../views/ResetPassword.vue";
 import NotFound from "../views/NotFound.vue";
+import store from "../store";
+
 const routes = [
-    // Public routes
+    {
+        path: "/",
+        redirect: "/app",
+    },
+    {
+        path: "/app",
+        name: "app",
+        component: AppLayout,
+        meta: {
+            requiresAuth: true,
+        },
+        children: [
+            {
+                path: "dashboard",
+                name: "app.dashboard",
+                component: Dashboard,
+            },
+            {
+                path: "products",
+                name: "app.products",
+                component: Products,
+            },
+        ],
+    },
     {
         path: "/login",
         name: "login",
         component: Login,
-        meta: { requiresGuest: true },
+        meta: {
+            requiresGuest: true,
+        },
     },
     {
         path: "/request-password",
@@ -35,35 +61,6 @@ const routes = [
         path: "/:pathMatch(.*)",
         name: "notfound",
         component: NotFound,
-    },
-    {
-        path: "/resetPassword",
-        name: "resetPassword",
-        component: ResetPassword,
-        meta: { requiresGuest: true },
-    },
-
-    // Authenticated app routes
-    {
-        path: "/app",
-        name: "app",
-        redirect: "/app/dashboard",
-        component: AppLayout,
-        meta: {
-            requiresAuth: true,
-        },
-        children: [
-            {
-                path: "/dashboard",
-                name: "app.dashboard",
-                component: Dashboard,
-            },
-            {
-                path: "/products",
-                name: "app.products",
-                component: Products,
-            },
-        ],
     },
 ];
 
