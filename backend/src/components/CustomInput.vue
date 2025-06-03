@@ -72,7 +72,7 @@
 <script setup>
 
 import {computed, ref} from "vue";
-// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const editor = ClassicEditor;
 

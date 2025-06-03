@@ -33,7 +33,7 @@ export function logout({ commit }) {
 // export function getProducts({ commit }) {
 //     commit("setProducts", [true]);
 //     return axiosClient
-//         .get("product")
+//         .get("products")
 //         .then((res) => {
 //             commit("setProducts", [false, res.data]);
 //         })
@@ -43,20 +43,18 @@ export function logout({ commit }) {
 // }
 
 export function getProducts(
-    { commit, state },
-    { url = null, search = "", per_page, sort_field, sort_direction } = {}
-) {
-    commit("setProducts", [true]);
+    {commit},
+    { url = null, search = "", perPage, sort_field, sort_direction })
+ {
+    commit('setProducts', [true]);
     url = url || "/products";
-    const params = {
-        per_page: state.products.limit,
-    };
+
     return axiosClient
         .get(url, {
             params: {
-                ...params,
+                
                 search,
-                per_page,
+                per_page: perPage,
                 sort_field,
                 sort_direction,
             },
@@ -77,7 +75,7 @@ export function createProduct({ commit }, product) {
     if (product.image instanceof File) {
         const form = new FormData();
         form.append("title", product.title);
-        product.images.forEach((im) => form.append("images[]", im));
+        form.append("image", product.image);
         form.append("description", product.description || "");
         form.append("published", product.published ? 1 : 0);
         form.append("price", product.price);
@@ -97,6 +95,8 @@ export function updateProduct({ commit }, product) {
         form.append("price", product.price);
         form.append("_method", "PUT");
         product = form;
+    } else {
+        product._method = "PUT";
     }
     return axiosClient.post(`/products/${id}`, product);
 }

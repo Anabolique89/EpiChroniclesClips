@@ -12,6 +12,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use Illuminate\Auth\AuthenticationException;
 
 class ProductController extends Controller
 {
@@ -118,16 +119,38 @@ class ProductController extends Controller
         return response()->noContent();
     }
 
+    // private function saveImage(UploadedFile $image)
+    // {
+    //     $path = 'images/' . Str::random();
+    //     if (!Storage::exists($path)) {
+    //         Storage::makeDirectory($path, 0755, true);
+    //     }
+    //     if (!Storage::putFileAS('public/' . $path, $image, $image->getClientOriginalName())) {
+    //         throw new \Exception("Unable to save file \"{$image->getClientOriginalName()}\"");
+    //     }
+
+    //     return $path . '/' . $image->getClientOriginalName();
+    // }
+
     private function saveImage(UploadedFile $image)
     {
         $path = 'images/' . Str::random();
-        if (!Storage::exists($path)) {
-            Storage::makeDirectory($path, 0755, true);
+
+        // Use the correct disk: public
+        if (!Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->makeDirectory($path);
         }
-        if (!Storage::putFileAS('public/' . $path, $image, $image->getClientOriginalName())) {
+
+        $filePath = Storage::disk('public')->putFileAs(
+            $path,
+            $image,
+            $image->getClientOriginalName()
+        );
+
+        if (!$filePath) {
             throw new \Exception("Unable to save file \"{$image->getClientOriginalName()}\"");
         }
 
-        return $path . '/' . $image->getClientOriginalName();
+        return $filePath; // this will be relative to 'public' disk, e.g. 'images/xyz/image.jpg'
     }
 }

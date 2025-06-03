@@ -70,14 +70,13 @@
 </template>
 
 <script setup>
-import {computed, onUpdated, ref} from 'vue'
-import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
-import {ExclamationIcon} from '@heroicons/vue/outline'
+import {computed, onUpdated, ref} from 'vue';
+import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue';
+import {ExclamationIcon} from '@heroicons/vue/outline';
 import CustomInput from "../components/CustomInput.vue";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import store from "../store/index.js";
 import Spinner from "../components/Spinner.vue";
-
-
 
 const loading = ref(false)
 

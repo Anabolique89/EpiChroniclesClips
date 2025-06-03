@@ -8,9 +8,7 @@ use Illuminate\Database\Seeder;
 
 class AdminUserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+   
     public function run()
     {
         User::create([
